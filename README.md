@@ -1,0 +1,3 @@
+Campus Lost & Found Management System
+Abstract
+The Campus Lost & Found Management System is a Flutter-based mobile application developed to provide a simple and centralized platform for reporting, searching, and recovering lost items within a college campus. Students and staff can report lost or found items by providing details such as item name, description, location, date, and image. The application helps users easily browse and search for reported items, reducing the difficulty of finding misplaced belongings. The system aims to make the lost and found process more organized, efficient, and user-friendly.
