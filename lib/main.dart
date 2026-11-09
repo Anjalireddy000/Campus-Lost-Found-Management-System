@@ -1,4 +1,4 @@
-
+import 'my_reports_page.dart';
 import 'package:flutter/material.dart';
 import 'items_page.dart';
 import 'report_item_page.dart';
@@ -243,12 +243,17 @@ class HomePage extends StatelessWidget {
                   () => showMessage(context, 'Categories coming soon'),
                 ),
                 dashboardCard(
-                  context,
-                  'My Reports',
-                  'Track your submissions',
-                  Icons.assignment,
-                  () => showMessage(context, 'My Reports coming soon'),
-                ),
+  context,
+  'My Reports',
+  'View your submissions',
+  Icons.assignment,
+  () => Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const MyReportsPage(),
+    ),
+  ),
+),
               ],
             ),
 
