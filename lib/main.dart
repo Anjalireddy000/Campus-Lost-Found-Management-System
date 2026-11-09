@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'items_page.dart';
-
+import 'report_item_page.dart';
 void main() {
   runApp(const CampusApp());
 }
@@ -212,19 +212,29 @@ class HomePage extends StatelessWidget {
                   () => openItems(context, 'Found Items', false),
                 ),
                 dashboardCard(
-                  context,
-                  'Report Lost Item',
-                  'Report something missing',
-                  Icons.report_problem,
-                  () => showMessage(context, 'Lost item report form coming soon'),
-                ),
+  context,
+  'Report Lost Item',
+  'Report something missing',
+  Icons.report_problem,
+  () => Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const ReportItemPage(isLost: true),
+    ),
+  ),
+),
                 dashboardCard(
-                  context,
-                  'Report Found Item',
-                  'Report something you found',
-                  Icons.add_box,
-                  () => showMessage(context, 'Found item report form coming soon'),
-                ),
+  context,
+  'Report Found Item',
+  'Report something you found',
+  Icons.add_box,
+  () => Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => const ReportItemPage(isLost: false),
+    ),
+  ),
+),
                 dashboardCard(
                   context,
                   'Categories',
