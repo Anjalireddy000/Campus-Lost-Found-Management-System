@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class ItemDetailsPage extends StatelessWidget {
@@ -10,6 +9,25 @@ class ItemDetailsPage extends StatelessWidget {
     required this.itemName,
     required this.itemType,
   });
+
+  void showClaimDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Claim Item'),
+        content: Text(
+          'Your claim request for "$itemName" '
+          'has been submitted successfully! (Demo only)',
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,50 +42,55 @@ class ItemDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Center(
-              child: Icon(
-                Icons.inventory_2,
-                size: 90,
-                color: Colors.indigo,
-              ),
+            const Icon(
+              Icons.inventory_2,
+              size: 70,
+              color: Colors.indigo,
             ),
-            const SizedBox(height: 25),
+            const SizedBox(height: 20),
+
             Text(
               itemName,
               style: const TextStyle(
-                fontSize: 25,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
+
             const SizedBox(height: 15),
-            Card(
-              child: ListTile(
-                leading: const Icon(
-                  Icons.category,
-                  color: Colors.indigo,
-                ),
-                title: const Text('Item Type'),
-                subtitle: Text(itemType),
-              ),
+
+            Text(
+              'Item Type: $itemType',
+              style: const TextStyle(fontSize: 18),
             ),
-            const Card(
-              child: ListTile(
-                leading: Icon(
-                  Icons.location_on,
-                  color: Colors.indigo,
-                ),
-                title: Text('Location'),
-                subtitle: Text('Not specified'),
-              ),
+
+            const SizedBox(height: 15),
+
+            const Text(
+              'Location: Not specified',
+              style: TextStyle(fontSize: 16),
             ),
-            const Card(
-              child: ListTile(
-                leading: Icon(
-                  Icons.description,
-                  color: Colors.indigo,
+
+            const SizedBox(height: 15),
+
+            const Text(
+              'Description: No description available',
+              style: TextStyle(fontSize: 16),
+            ),
+
+            const SizedBox(height: 30),
+
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () => showClaimDialog(context),
+                icon: const Icon(Icons.check_circle),
+                label: const Text('Claim Item'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.indigo,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.all(15),
                 ),
-                title: Text('Description'),
-                subtitle: Text('No description available'),
               ),
             ),
           ],
