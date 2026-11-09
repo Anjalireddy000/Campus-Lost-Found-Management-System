@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-
+import 'item_details_page.dart';
 class ItemsPage extends StatefulWidget {
   final String title;
   final bool isLost;
@@ -94,23 +93,31 @@ class _ItemsPageState extends State<ItemsPage> {
                     ),
                     itemCount: filteredItems.length,
                     itemBuilder: (context, index) {
-                      return Card(
-                        child: ListTile(
-                          leading: Icon(
-                            widget.isLost
-                                ? Icons.search
-                                : Icons.inventory_2,
-                            color: Colors.indigo,
-                          ),
-                          title: Text(filteredItems[index]),
-                          subtitle: Text(
-                            widget.isLost
-                                ? 'Lost item'
-                                : 'Found item',
-                          ),
-                        ),
-                      );
-                    },
+  return Card(
+    child: ListTile(
+      leading: Icon(
+        widget.isLost ? Icons.search : Icons.inventory_2,
+        color: Colors.indigo,
+      ),
+      title: Text(filteredItems[index]),
+      subtitle: Text(
+        widget.isLost ? 'Lost item' : 'Found item',
+      ),
+      trailing: const Icon(Icons.arrow_forward_ios),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ItemDetailsPage(
+              itemName: filteredItems[index],
+              itemType: widget.isLost ? 'Lost Item' : 'Found Item',
+            ),
+          ),
+        );
+      },
+    ),
+  );
+},
                   ),
           ),
         ],
