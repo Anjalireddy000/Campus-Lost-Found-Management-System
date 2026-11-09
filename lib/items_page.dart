@@ -31,7 +31,31 @@ class _ItemsPageState extends State<ItemsPage> {
   ];
 
   String searchText = '';
+  String selectedCategory = 'All';
 
+final List<String> categories = [
+  'All',
+  'Electronics',
+  'ID Cards',
+  'Books',
+  'Bags',
+  'Other',
+];
+
+String getCategory(String item) {
+  switch (item) {
+    case 'ID Card':
+      return 'ID Cards';
+    case 'Notebook':
+      return 'Books';
+    case 'Phone':
+      return 'Electronics';
+    case 'Backpack':
+      return 'Bags';
+    default:
+      return 'Other';
+  }
+}
   @override
   void dispose() {
     searchController.dispose();
@@ -41,11 +65,15 @@ class _ItemsPageState extends State<ItemsPage> {
   @override
   Widget build(BuildContext context) {
     final items = widget.isLost ? lostItems : foundItems;
+    final filteredItems = items.where((item) {
+  final matchesSearch =
+      item.toLowerCase().contains(searchText.toLowerCase());
 
-    final filteredItems = items
-        .where((item) =>
-            item.toLowerCase().contains(searchText.toLowerCase()))
-        .toList();
+  final matchesCategory = selectedCategory == 'All' ||
+      getCategory(item) == selectedCategory;
+
+  return matchesSearch && matchesCategory;
+}).toList();
 
     return Scaffold(
       appBar: AppBar(
@@ -82,6 +110,31 @@ class _ItemsPageState extends State<ItemsPage> {
               ),
             ),
           ),
+          Padding(
+  padding: const EdgeInsets.symmetric(horizontal: 16),
+  child: DropdownButtonFormField<String>(
+    initialValue: selectedCategory,
+    decoration: const InputDecoration(
+      labelText: 'Filter by Category',
+      border: OutlineInputBorder(),
+      prefixIcon: Icon(Icons.category),
+    ),
+    items: categories.map((category) {
+      return DropdownMenuItem(
+        value: category,
+        child: Text(category),
+      );
+    }).toList(),
+    onChanged: (value) {
+      if (value != null) {
+        setState(() {
+          selectedCategory = value;
+        });
+      }
+    },
+  ),
+),
+const SizedBox(height: 12),
           Expanded(
             child: filteredItems.isEmpty
                 ? const Center(
