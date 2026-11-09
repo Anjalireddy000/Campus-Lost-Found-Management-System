@@ -1,7 +1,10 @@
-import 'my_reports_page.dart';
+
 import 'package:flutter/material.dart';
 import 'items_page.dart';
 import 'report_item_page.dart';
+import 'my_reports_page.dart';
+import 'about_help_page.dart';
+
 void main() {
   runApp(const CampusApp());
 }
@@ -94,13 +97,11 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Welcome section
             const Text(
               'Welcome to Campus!',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -110,10 +111,8 @@ class HomePage extends StatelessWidget {
               'Find lost belongings and help others recover theirs.',
               style: TextStyle(color: Colors.grey[700]),
             ),
-
             const SizedBox(height: 20),
 
-            // Search bar (visual for now)
             TextField(
               decoration: InputDecoration(
                 hintText: 'Search items...',
@@ -123,10 +122,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
 
-            // Statistics
             const Text(
               'Dashboard Overview',
               style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
@@ -164,8 +161,7 @@ class HomePage extends StatelessWidget {
                       padding: EdgeInsets.all(16),
                       child: Column(
                         children: [
-                          Icon(Icons.inventory_2,
-                              color: Colors.green, size: 30),
+                          Icon(Icons.inventory_2, color: Colors.green, size: 30),
                           SizedBox(height: 8),
                           Text(
                             '8',
@@ -182,7 +178,6 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-
             const SizedBox(height: 20),
 
             const Text(
@@ -212,29 +207,29 @@ class HomePage extends StatelessWidget {
                   () => openItems(context, 'Found Items', false),
                 ),
                 dashboardCard(
-  context,
-  'Report Lost Item',
-  'Report something missing',
-  Icons.report_problem,
-  () => Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (_) => const ReportItemPage(isLost: true),
-    ),
-  ),
-),
+                  context,
+                  'Report Lost Item',
+                  'Report something missing',
+                  Icons.report_problem,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ReportItemPage(isLost: true),
+                    ),
+                  ),
+                ),
                 dashboardCard(
-  context,
-  'Report Found Item',
-  'Report something you found',
-  Icons.add_box,
-  () => Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (_) => const ReportItemPage(isLost: false),
-    ),
-  ),
-),
+                  context,
+                  'Report Found Item',
+                  'Report something you found',
+                  Icons.add_box,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const ReportItemPage(isLost: false),
+                    ),
+                  ),
+                ),
                 dashboardCard(
                   context,
                   'Categories',
@@ -243,23 +238,33 @@ class HomePage extends StatelessWidget {
                   () => showMessage(context, 'Categories coming soon'),
                 ),
                 dashboardCard(
-  context,
-  'My Reports',
-  'View your submissions',
-  Icons.assignment,
-  () => Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (_) => const MyReportsPage(),
-    ),
-  ),
-),
+                  context,
+                  'My Reports',
+                  'View your submissions',
+                  Icons.assignment,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const MyReportsPage(),
+                    ),
+                  ),
+                ),
+                dashboardCard(
+                  context,
+                  'About & Help',
+                  'Learn how to use the app',
+                  Icons.help_outline,
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const AboutHelpPage(),
+                    ),
+                  ),
+                ),
               ],
             ),
-
             const SizedBox(height: 20),
 
-            // Additional information
             Card(
               color: Colors.amber.shade50,
               child: const Padding(
@@ -293,7 +298,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
 
             Center(
